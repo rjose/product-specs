@@ -1,0 +1,80 @@
+TextChart Functional Spec
+=========================
+Rino Jose <rjose@ejorp.com>
+Rev 1, April 14, 2013
+
+*NOTE:* This spec is currently being drafted and is not yet
+ complete. Any of the items below are subject to change. This spec
+ only describes the user-visible portions of TextChart. It does not
+ discuss any of the technical issues involved in its development.
+
+
+Overview
+--------
+TextChart is a FreeBSD console app that enables people to create
+text-based charts using only the keyboard.
+
+
+Scenarios
+---------
+This is how some typical users will want to use TextChart.
+
+Scenario 1: Tucker
+~~~~~~~~~~~~~~~~~~
+Tucker is a Software Architect who wants to quickly fire up TextChart
+to put draw some architecture diagrams that he wants to add to a
+technical spec. He likes the idea of checking these charts into git so
+they're part of the code base. He likes that anyone can view them at
+any time and even email them without needing a special viewer.
+
+Tucker is interested in being able to put a chart together quickly. He
+doesn't want to use the mouse. He also doesn't want to deal with
+low-level ASCII drawing. He wants to deal with the elements of his
+charts as higher-level entities. He wants to have a "box" that he can
+draw and edit with a few keystrokes. He wants to be able to add a
+title to the box. He wants to connect boxes. He basically wants to
+have OmniGraffle for the console (but without all of the extra stuff).
+
+Scenario 2: Vasco
+~~~~~~~~~~~~~~~~~
+Vasco is a software dev who's implementing some planning software that
+he wants to run from a console. He likes the idea of TextChart, but he
+wants to use the elements of TextChart inside of his own
+application. He wants to reuse some of the functionality of TextChart
+to create dependency graphs and use this to present critical path info
+to his users.
+
+He wants to extend the controls and elements of TextChart. He still
+wants the ability to export the graphical parts of his app to a text
+file that he can add to his plan of record, but he also wants to tie
+into the TextChart libraries. He also wants to be able to save his
+planning documents in a format that TextChart can read and
+update. This would have extra information not part of TextChart, but
+which could be edited without corrupting the other data.
+
+Scenario 3: Gabriella
+~~~~~~~~~~~~~~~~~~~~~
+Gabriella is a FreeBSD user who wants to view a TextChart document
+without having to edit it. She fires up TextChart with some
+commandline parameters and TextChart emits the ASCII to screen. At
+this point, she's good to go.
+
+Scenario 4: Morton
+~~~~~~~~~~~~~~~~~~
+Morton is writing a web app that needs to import the data from a
+TextChart document to update a centralized database. The planning
+information from Vasco is combined with data from tracking software to
+give a status of all of the projects in the company. He's written a
+client application that can read a TextChart document, extract
+relevant information from it and then post the data to his web app's
+server. Everyone on his team updates their documents that sit in a
+Dropbox folder.
+
+There's a clear separation between the summarized data that comes from
+the web server and the inputs that go into it. The summarized data
+*never* makes its way back into the original TextChart docs.
+
+
+Non-Goals
+---------
+- TextChart won't parse generic ASCII art documents.
