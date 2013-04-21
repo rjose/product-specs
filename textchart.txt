@@ -19,8 +19,8 @@ Scenarios
 ---------
 This is how some typical users will want to use TextChart.
 
-Scenario 1: Tucker
-~~~~~~~~~~~~~~~~~~
+Scenario 1: Tucker: SW Architect
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Tucker is a Software Architect who wants to quickly fire up TextChart
 to put draw some architecture diagrams that he wants to add to a
 technical spec. He likes the idea of checking these charts into git so
@@ -35,8 +35,8 @@ draw and edit with a few keystrokes. He wants to be able to add a
 title to the box. He wants to connect boxes. He basically wants to
 have OmniGraffle for the console (but without all of the extra stuff).
 
-Scenario 2: Vasco
-~~~~~~~~~~~~~~~~~
+Scenario 2: Vasco: SW Dev
+~~~~~~~~~~~~~~~~~~~~~~~~~
 Vasco is a software dev who's implementing some planning software that
 he wants to run from a console. He likes the idea of TextChart, but he
 wants to use the elements of TextChart inside of his own
@@ -52,15 +52,15 @@ planning documents in a format that TextChart can read and
 update. This would have extra information not part of TextChart, but
 which could be edited without corrupting the other data.
 
-Scenario 3: Gabriella
-~~~~~~~~~~~~~~~~~~~~~
+Scenario 3: Gabriella: General User
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Gabriella is a FreeBSD user who wants to view a TextChart document
 without having to edit it. She fires up TextChart with some
 commandline parameters and TextChart emits the ASCII to screen. At
 this point, she's good to go.
 
-Scenario 4: Morton
-~~~~~~~~~~~~~~~~~~
+Scenario 4: Morton: Web App Dev
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Morton is writing a web app that needs to import the data from a
 TextChart document to update a centralized database. The planning
 information from Vasco is combined with data from tracking software to
@@ -78,3 +78,13 @@ the web server and the inputs that go into it. The summarized data
 Non-Goals
 ---------
 - TextChart won't parse generic ASCII art documents.
+
+
+Flowchart
+---------
+(If we had textchart, we'd use it here to draw this flowchart :-))
+
+
+Screens
+-------
+
