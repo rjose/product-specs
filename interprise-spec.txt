@@ -285,8 +285,14 @@ CPM analysis
 
 Define QA work
 ~~~~~~~~~~~~~~
+*****
 Q: Should the concept of QA work be built into the system, or should there be a
 separate, generic mechanism for it?
 
 A: I think a separate, generic mechanism. If the QA were built in, then people
 would try to use it to do different things.
+*****
+
+You should be able to map an "Add QA" task to a list of work items. The
+mapping is the generic mechanism. The functions can be specified in terms of a
+DSL (at some point). For now, a function should do.
