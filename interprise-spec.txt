@@ -1,0 +1,292 @@
+Interprise Spec
+===============
+Rino Jose <rjose@linkedin.com>
+v0.1, April 25, 2013: Initial version with freewriting and many questions
+
+Freewriting
+-----------
+
+.Pain points
+
+We're changing too many things at the end. We need a little bit of waterfall. We
+need to respect dependencies between design and dev (and across teams). We need
+to do some critical path/chain analysis to get an estimate of when things could
+be done.
+
+There's too much and too little communication. We need to get the right
+information to the right people at the right time (the "C" in FCS).
+
+We need to automate some of our tracking. Manual entry is good for taking notes.
+It's bad for doing planning because there's too much chance for manual error.
+
+The program and project managers all have different methodologies. This is OK,
+but we need to define the interfaces between teams. How we run things should be
+up to us. We need to define the type of information that we exchange. If we can
+do this, then we can automate some of the reporting.
+
+People need to be able to register (or be registered) to get updates on
+something. Like a JIRA watch but lighter and more relevant.
+
+We need to prioritize things across teams. We need to integrate with the
+"targets" that Jeff focuses on. We need to find common units for what "value"
+means and then make decisions to optimize it. 
+
+We need a way to bring time into our decision-making. There are windows we need
+to hit. These have value. There's a distribution of value for each product over
+time. Some things magnify the value of other things.
+
+We need to learn from things that we miss. We need to take care of emails, and
+splash pages, and landing pages, etc. We need checklists for development. 
+
+
+
+.Why isn't execution crisp?
+
+We should be executing like a machine. We need a way to onboard people. We need
+a way to cleanly plan and execute projects. We need to have confidence that we
+can do things well. We should do the 50% and 90% planning. We should track a
+buffer and when we start going through it too fast, we should adjust. We should
+cut features early on. We should continually readjust scope.
+
+We need to track better. We need to find an easy way to track progress. We need
+to understand how things change over the life of a project. We should note key
+events that happen during a project and correlate that to what's happening in a
+project.
+
+We need to get developers into flow. We have to stop interrupting them. We need
+to give people time to think and focus. 
+
+We need a way to automate the communication of information. We need to summarize
+information better. We need to a way to automatically let people know that a
+change that happened in one group affects other people and other groups.
+
+We need a way to call a meeting at the point that something happens. Meetings
+should be extraordinary events (at least for devs).  
+
+We need to queue up work that comes from outside. We should monitor the volume
+of this type of work. We should give ETAs based on the current loading of
+people.
+
+We should understand what a healthy level of unplanned work is and when we need
+to step back and figure out what's gone wrong.
+
+We need a way to see how busy people are; how much is on their plates.
+
+We need a way to identify people that can take on extra work.
+
+We need a way to surface work that's critical and to prioritize it
+automatically. We need a way to figure out if we have a priority inversion.
+
+We need to be able to see when people are on vacation and what that does to the
+schedule.
+
+We need to simulate how projects play out. We need to identify risks and
+simulate them as well.
+
+We need to estimate when work will be done. 
+
+
+.Thoughts
+
+We could do random selection of assignments. We could do brute force. We could
+run these in parallel. We could do as soon as possible. We could do as late as
+possible. 
+
+Data
+----
+What do we need to store?
+
+* People
+** There are people who are doing the work
+** There are people who care about when the work is done
+
+* Team
+** Can team just be a tag, or is there something special about it that we need
+to model?
+** A team has a lead
+** A team has syncups
+** A team has a focused set of items
+** A team has a backlog
+
+
+* Work item
+** Includes utility function?
+** Includes effort?
+** Does this include high level "mission items" (like company mission/targets)
+** Does this also cover projects?
+** Multiple people can be working on a work item (assignments?)
+** Work item updates (should these be modeled separately?). These are what
+project managers would enter during status meetings.
+
+* System Events
+** Need to broadcast when the state of the system changes
+** How do we implement a daily digest?
+** Can we send reminders for people to update effort? It should be a one click
+type of thing (like "no work done", "done", "1d left", "3d left", "Replan")
+
+* Schedule/Timeline
+** Is this a facet of something above? People, team, work item?
+
+.Thoughts
+
+What is a schedule? It's a timeline with things on it. That's it. We can put
+anything we want on a timeline. An event, the span of a work item. The target
+date for a project. The utility function of a project. The combined utility
+function of all projects. It could show vacation spans for people. It could show
+where we're overloaded. It could show what things are at risk. Maybe calling it
+a Timeline would make more sense. The Timeline should enable you to summarize
+data in different ways. It should let your correlate events. 
+
+Teams should be modeled separately for the reasons above.
+
+We should sketch out a data flow diagram. Maybe we could show the purpose of
+having a bus. Maybe we could show offline processing. Do we need a server that
+can communicate over HTTP?
+
+Should we have each user have their local view of the data and then have some
+way to superimpose everything?
+
+The role of the PMs could be to keep the system up to date. The value of the
+system would be to magnify the benefit of doing this. Rather than having cells
+of text that had to be interpret, we could have systems. 
+
+How do we integrate with existing systems? JIRA is the main one. Google
+spreadsheets are another. Wiki is a third. Email is a fourth.
+
+
+Research Questions
+------------------
+* What's the best way to model utility functions?
+** It should be more than a function of one project. There should by
+multiplicative effects
+** We can do a simplification and assume utility functions are linear as a
+starting point
+
+* Can I view this as a worksheet?
+** Should we start with a spreadsheet model and extend it?
+
+* Do we care about history?
+
+* When would people update their effort?
+
+* How do we manage the relationship between work items and updates to them?
+
+* Can someone be on multiple teams?
+
+* Are there semantics beyond a request/response model like HTTP?
+
+* How does a production issue compare in value to other items? We need impact
+  (which would be how many users). We'd also need cost per user. We might also
+  need general cost. We need a way to model value in different ways.
+
+* Can we integrate with LDAP?
+
+* Can we integrate with JIRA? What can we sync from JIRA?
+
+User interface
+--------------
+* Most people will be comfortable with a spreadsheet interface
+* Will ncurses be easier to implement than a web interface?
+
+Technology
+----------
+* Should we store everything in memory and then write to disk in the background?
+
+
+Scenarios
+---------
+
+Add people to system
+~~~~~~~~~~~~~~~~~~~~
+Ideally, we can hook into our LDAP system and look up people easily by name.
+We should be able to autofill information this way.
+
+Define teams
+~~~~~~~~~~~~
+I'd define an Austin team, a Tenor team, a Tablet team, etc. We should be able
+to add people who are already in the system to a team. We should also be able
+to add people from LDAP. Adding someone from LDAP should also add them to the
+system.
+
+A team should have a name. A team should also have a backlog of work. It
+should really be a priority queue. Priority should come from the value of the
+work. The priority queue should be integrated with JIRA/Greenhopper.
+
+A team should have a set of people (usually from other teams) who are points
+of contact (POCs). They should receive automatic updates when high value items
+that the team is working on changes state.
+
+Import work from JIRA
+~~~~~~~~~~~~~~~~~~~~~
+We need to identify a tag in JIRA that we can associate with a team. Ideally,
+we can pull tasks over via HTTP calls. If this doesn't work, we should try
+exporting to Excel and then import data. This is less preferred, but we could
+do it.
+
+Add work
+~~~~~~~~
+All work items need to be in JIRA. This is the only way we can have
+consistency. Adding work means adding it to JIRA first.
+
+Even so, we should have another way to add work. This ways should be the
+underlying way that JIRA adds work as well. 
+
+You should be able to specify a skill for a role. 
+
+Assign work
+~~~~~~~~~~~
+Assigning work should be done in JIRA. There should be an underlying way to do
+this as well. We need to make sure the effort left is entered.
+
+Schedule work
+~~~~~~~~~~~~~
+Work should be scheduled automatically whenever its assigned or whenever
+effort left is updated. Marking work as done should mark should automatically
+set the effort left to zero. The effort left needs to be pulled from JIRA.
+
+Start and end dates should be updated for each work item. Work should be scheduled
+by priority according to person. The scheduling should take vacations and
+weekends into account. The units of the work are in days. Fractional days are
+allowed.
+
+There isn't the concept of a schedule as a data object. A schedule is merely a
+view of things that can occur in time. Things that can be viewed on a
+timeline/schedule must have certain data associated with them: start date
+(fractional) and duration (fractional). Items that have zero duration are
+events. These are represented differently on a schedule.  
+
+Work is scheduled periodically when certain events occur (work assigned, work
+effort updated, every 4 hours).
+
+As work items are scheduled, their completed dates are updated.
+
+Unassigned work is _not_ scheduled. 
+
+Automatic updates
+~~~~~~~~~~~~~~~~~
+For work with value over a certain level, updates are sent out for certain
+events (estimated date changes, work is marked as complete, work assignment
+changes). Updates are sent to the leads for the team in which they occured as
+well as to every POC specified for the team.
+
+Specifying dependencies
+~~~~~~~~~~~~~~~~~~~~~~~
+Dependencies between work items can be specified.
+
+You can create ad hoc work that needs to be assigned. You can specify the JIRA
+ticket for a prereq. You should be able to get typeahead for work that can be
+a prereq. When searching for work, items in the team should be presented
+first.
+
+You can also say that something depends on a work item.
+
+CPM analysis
+~~~~~~~~~~~~
+
+Define QA work
+~~~~~~~~~~~~~~
+Q: Should the concept of QA work be built into the system, or should there be a
+separate, generic mechanism for it?
+
+A: I think a separate, generic mechanism. If the QA were built in, then people
+would try to use it to do different things.
