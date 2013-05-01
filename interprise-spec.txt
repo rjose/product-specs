@@ -1,31 +1,111 @@
 Interprise Spec
 ===============
 Rino Jose <rjose@linkedin.com>
-v0.1, April 25, 2013: Initial version with freewriting and many questions
+v0.3, May 1, 2013: Revised from notes
 
-Freewriting
------------
+Introduction
+------------
+The way that we've tracked projects is too manual and error prone. It relies
+too much on memory and on verbal assurances. People commit to work and
+timelines that they have very little confidence in. When things change, the
+right people aren't always in the loop.  We should be executing like a
+machine. We need a way to cleanly plan and execute projects. We need to have
+confidence that we can do things well.
 
-.Pain points
+The goal of this application is to address these points. 
 
-We're changing too many things at the end. We need a little bit of waterfall. We
-need to respect dependencies between design and dev (and across teams). We need
-to do some critical path/chain analysis to get an estimate of when things could
-be done.
+.Coordination
 
-There's too much and too little communication. We need to get the right
-information to the right people at the right time (the "C" in FCS).
+Daily "round table" syncups are the way that most coordination takes place.
+While good for certain types of updates, this is often an inefficient use of
+time. It would be much better to reserve the daily standups for items that
+were extraordinary and that required some personal explanation/description.
 
-We need to automate some of our tracking. Manual entry is good for taking notes.
-It's bad for doing planning because there's too much chance for manual error.
+As an issue-tracking tool, JIRA works great. As a coordination tool, it's
+noisy. There's too many low level updates, too many notifications of minor
+changes. There isn't the sense that one item depends on another. There isn't a
+sense for how important one item is than another. JIRA is good as a triaging
+tool, but not more than that.
 
-The program and project managers all have different methodologies. This is OK,
-but we need to define the interfaces between teams. How we run things should be
-up to us. We need to define the type of information that we exchange. If we can
-do this, then we can automate some of the reporting.
+Because of inefficient coordination, we change too many things too late
+without enough insight into their cost or impact. We use "agile" as an excuse
+to be ad hoc. Over time, this results in micromanaging the last parts of a
+project and creates the need for special "war room" development to finish all
+of the work.
 
-People need to be able to register (or be registered) to get updates on
-something. Like a JIRA watch but lighter and more relevant.
+An agile approach works well when tasks are small, independent, and
+feature-oriented. It breaks down when there are large infrastructure pieces
+and when there are many dependencies between tasks, especially when some of
+this work must be performed by external teams.
+
+For the type of work that we're currently doing, we need a touch of
+waterfall. We need to put more emphasis on understanding dependencies and
+managing them. If dependencies dominate a project, then they will drive the
+schedule. It's important to understand and track this. We need to at least
+understand the critical path even if we are resource bound. This bounds how
+quickly we can finish a project (assuming estimates are good).
+
+.Communication
+
+Right now, there's too much and too little communication. One of our stated
+behaviors was to get the right information to the right people at the right
+time (the "C" in FCS). We're getting too much noise via email. We're getting
+too much non-information in the syncups. We're getting too much textual
+information in email. We're getting too much minutiae from JIRA.
+
+We're not getting enough high value information. We're not getting data that
+helps us understand the state of things. Our data tends to be binary. Will we
+hit this date or not? Is this done or not? It's very short term and immediate.
+It needs to be longer term. The data we get from each person should magnify
+our understanding of where we are. It should be multiplicative. Right now,
+updates tend to mask other updates. It's subtractive in many ways. Updates
+require too much mental energy and effort to process.
+
+We need a way for people to subscribe to information that they need. Some of
+this can be done automatically via the dependencies between work. For example,
+if a prereq will be late, everyone who depends on it should also be informed
+automatically. Some of this can follow the "watch" model of JIRA (but
+hopefully much lighter).
+
+
+.Tracking
+
+Our tracking is currently too manual and too textual. We tend to take notes in
+syncups and add them to a spreadsheet or to a JIRA ticket. There's too much
+room for interpretation. There are too many non-updates like "we're starting
+to look at that now". There are too many promises like "this should be done by
+the end of the week". There's very little information that lets us know how
+things affect each other. 
+
+
+.Cross team coordination
+
+One of our biggest challenges is working across teams. The program and project
+managers all have different methodologies but they need to work together to
+figure out where things are. There's a lot of meetings, a lot of manual
+updates, a lot of promises, and a lot of broken promises. 
+
+We need to define interfaces between teams, a standard for communicating
+status and information. How everyone runs is up to them, but how information
+is exchanged and used should be common to everyone.
+
+Having a common understanding of how information is reported will also help
+automate some of the reporting. We can have tools provide information in the
+right form. We can have the right form be entered into spreadsheets and
+imported into other tools. We can send information to other systems and
+process it in different ways. It opens up the power of the data and increases
+our understanding of where things are. It enables us to see further and to act
+at a distance. 
+
+
+.Prioritization
+
+It's been a real challenge to prioritize across teams. Every team has
+different OKRs and different timelines. What's important to one team may be
+low priority for another. This is a problem. We need to have a set of overall
+priorities set by the executive team that the entire company needs to line up
+around. There needs to be a common way of communicating priority information.
+There needs to be a way to integrate priority information from external teams. 
 
 We need to prioritize things across teams. We need to integrate with the
 "targets" that Jeff focuses on. We need to find common units for what "value"
@@ -35,65 +115,78 @@ We need a way to bring time into our decision-making. There are windows we need
 to hit. These have value. There's a distribution of value for each product over
 time. Some things magnify the value of other things.
 
-We need to learn from things that we miss. We need to take care of emails, and
-splash pages, and landing pages, etc. We need checklists for development. 
+Requirements
+------------
+
+TODO: Based on the above, add more requirements here.
+TODO: Based on what's here, revise the above
+
+- Construct and manage buffers for projects. Need to know early on how to
+  reduce project scope.
+
+- Note key events as they occur during a project (right now, this is what
+  people use email for.
+
+- View a timeline of all key events that have occurred during the life of a
+  project. Be able to superimpose other information on this timeline.
+  - View a schedule of work items
+  - View target date for a project
+  - View utility function of a project
+  - View vacations for people
+  - View value of people's work over time
+
+- Need a _very_ easy way to track progress on work. Could have some sort of
+  limited set where you pick one of 5 options. Maybe we could literally have
+  shorthand that PMs could use when taking notes.
+
+- Need a way to report the status of projects after updates have been made.
+  This should flag tasks that are slipping and also give the impact to the
+  project. 
+
+- System should summarize information and send out a daily update. This needs
+  to include changes that have happened across teams.
+
+- Need to be able to queue up work for teams and people. This should be a
+  priority queue (or at least a list that's continuously sorted by value).
+  This should be for unassigned work. 
+
+- For individual people's queues we need to be able to give an ETA for
+  any work item. We should also be able to give statistics on the value of a
+  person's queue.
+
+- We should tag unplanned work so we can generate reports on how we're
+  operating.
+
+- We should also be able estimate how busy people are. This might just be
+  statistics on value. Conversely, this should help us find people who can
+  take on a high-value work item.
+
+- We need to identify a key work item that isn't being done. This should be
+  something that is causing high cost delays across the project. We should use
+  this to identify priority inversions within the team.
+
+- We should be able to view people's schedules. This includes vacation and
+  the value of work.
+
+- We need to simulate how projects play out. We should use historical data to
+  guess at what might be late in a project and estimate the impact. We should
+  use this to identify/evaluate project risks.
+
+- Need a way to try different scenarios before committing to any one. 
+
+- Need to generate work assignments. Could do round robin. Could do random
+  selection. Could have some heuristic. Should evaluate each assignment set.
+  This is an optimization problem that might be interesting to solve.
+
+- PMs need to keep the system up to date. We need to make it easy for PMs to
+  enter and update data.
+
+- We need to integrate with JIRA and Google spreadsheets.
 
 
 
-.Why isn't execution crisp?
-
-We should be executing like a machine. We need a way to onboard people. We need
-a way to cleanly plan and execute projects. We need to have confidence that we
-can do things well. We should do the 50% and 90% planning. We should track a
-buffer and when we start going through it too fast, we should adjust. We should
-cut features early on. We should continually readjust scope.
-
-We need to track better. We need to find an easy way to track progress. We need
-to understand how things change over the life of a project. We should note key
-events that happen during a project and correlate that to what's happening in a
-project.
-
-We need to get developers into flow. We have to stop interrupting them. We need
-to give people time to think and focus. 
-
-We need a way to automate the communication of information. We need to summarize
-information better. We need to a way to automatically let people know that a
-change that happened in one group affects other people and other groups.
-
-We need a way to call a meeting at the point that something happens. Meetings
-should be extraordinary events (at least for devs).  
-
-We need to queue up work that comes from outside. We should monitor the volume
-of this type of work. We should give ETAs based on the current loading of
-people.
-
-We should understand what a healthy level of unplanned work is and when we need
-to step back and figure out what's gone wrong.
-
-We need a way to see how busy people are; how much is on their plates.
-
-We need a way to identify people that can take on extra work.
-
-We need a way to surface work that's critical and to prioritize it
-automatically. We need a way to figure out if we have a priority inversion.
-
-We need to be able to see when people are on vacation and what that does to the
-schedule.
-
-We need to simulate how projects play out. We need to identify risks and
-simulate them as well.
-
-We need to estimate when work will be done. 
-
-
-.Thoughts
-
-We could do random selection of assignments. We could do brute force. We could
-run these in parallel. We could do as soon as possible. We could do as late as
-possible. 
-
-Data
-----
+Data Model
+----------
 What do we need to store?
 
 * People
@@ -103,14 +196,23 @@ What do we need to store?
 * Team
 ** Can team just be a tag, or is there something special about it that we need
 to model?
+** A team has a name
 ** A team has a lead
 ** A team has syncups
 ** A team has a focused set of items
-** A team has a backlog
+** A team has a backlog. Should be prioritized and integrated with JIRA
+   somehow
+** Should have POCs from other teams. These people should be notified when
+high value items change.
 
+
+* Project
+** Has a buffer
+** Has a final work item
+** Includes utility function
+** How do we deal with items in multiple projects?
 
 * Work item
-** Includes utility function?
 ** Includes effort?
 ** Does this include high level "mission items" (like company mission/targets)
 ** Does this also cover projects?
@@ -124,73 +226,63 @@ project managers would enter during status meetings.
 ** Can we send reminders for people to update effort? It should be a one click
 type of thing (like "no work done", "done", "1d left", "3d left", "Replan")
 
-* Schedule/Timeline
-** Is this a facet of something above? People, team, work item?
 
-.Thoughts
-
-What is a schedule? It's a timeline with things on it. That's it. We can put
-anything we want on a timeline. An event, the span of a work item. The target
-date for a project. The utility function of a project. The combined utility
-function of all projects. It could show vacation spans for people. It could show
-where we're overloaded. It could show what things are at risk. Maybe calling it
-a Timeline would make more sense. The Timeline should enable you to summarize
-data in different ways. It should let your correlate events. 
-
-Teams should be modeled separately for the reasons above.
+.TODO
 
 We should sketch out a data flow diagram. Maybe we could show the purpose of
 having a bus. Maybe we could show offline processing. Do we need a server that
 can communicate over HTTP?
 
-Should we have each user have their local view of the data and then have some
-way to superimpose everything?
 
-The role of the PMs could be to keep the system up to date. The value of the
-system would be to magnify the benefit of doing this. Rather than having cells
-of text that had to be interpret, we could have systems. 
-
-How do we integrate with existing systems? JIRA is the main one. Google
-spreadsheets are another. Wiki is a third. Email is a fourth.
 
 
 Research Questions
 ------------------
+
+Scenario Questions
+~~~~~~~~~~~~~~~~~~
+* Do we care about history?
+
+* When would people update their effort?
+
+* Can someone be on multiple teams?
+
+* Can I view info in this app as a worksheet?
+** Should we start with a spreadsheet model and extend it?
+
+* How does a production issue compare in value to other items? We need impact
+  (which would be how many users). We'd also need cost per user. We might also
+  need general cost. We need a way to model value in different ways.
+
+* How do we get people who love JIRA to adopt something new? Can we focus on
+  the interface and let them not even think about it?
+
+* We need to get developers into flow. We have to stop interrupting them. We need
+  to give people time to think and focus. How do we do this?
+
+* Most people will be comfortable with a spreadsheet interface
+
+* Will ncurses be easier to implement than a web interface?
+
+
+Technical Quesitons
+~~~~~~~~~~~~~~~~~~~
+* How do we manage the relationship between work items and updates to them?
+
 * What's the best way to model utility functions?
 ** It should be more than a function of one project. There should by
 multiplicative effects
 ** We can do a simplification and assume utility functions are linear as a
 starting point
 
-* Can I view this as a worksheet?
-** Should we start with a spreadsheet model and extend it?
-
-* Do we care about history?
-
-* When would people update their effort?
-
-* How do we manage the relationship between work items and updates to them?
-
-* Can someone be on multiple teams?
-
 * Are there semantics beyond a request/response model like HTTP?
-
-* How does a production issue compare in value to other items? We need impact
-  (which would be how many users). We'd also need cost per user. We might also
-  need general cost. We need a way to model value in different ways.
 
 * Can we integrate with LDAP?
 
 * Can we integrate with JIRA? What can we sync from JIRA?
 
-User interface
---------------
-* Most people will be comfortable with a spreadsheet interface
-* Will ncurses be easier to implement than a web interface?
-
-Technology
-----------
 * Should we store everything in memory and then write to disk in the background?
+
 
 
 Scenarios
@@ -208,13 +300,8 @@ to add people who are already in the system to a team. We should also be able
 to add people from LDAP. Adding someone from LDAP should also add them to the
 system.
 
-A team should have a name. A team should also have a backlog of work. It
-should really be a priority queue. Priority should come from the value of the
-work. The priority queue should be integrated with JIRA/Greenhopper.
 
-A team should have a set of people (usually from other teams) who are points
-of contact (POCs). They should receive automatic updates when high value items
-that the team is working on changes state.
+TODO: What's the lifecycle of a team look like?
 
 Import work from JIRA
 ~~~~~~~~~~~~~~~~~~~~~
