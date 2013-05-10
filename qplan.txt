@@ -1,7 +1,7 @@
 QPlan
 =====
 Rino Jose <rjose@linkedin.com>
-v0.1, May 10, 2013: Initial version
+v0.3, May 10, 2013: Focused the requirements on minimum set
 
 Overview
 --------
@@ -23,50 +23,101 @@ people, and is difficult to revise.
 
 Data gets stuck in the spreadsheet.
 
-.What do we need?
-- List people on a team by role
-- Generate stats on this list of people (e.g., how many iOS devs, how many
-  apps, how many QA).
-  - Stats may also be available manpower
-- System can assign work based on role/time left
-- Create a set of tasks
-- Apply prioritization to set of tasks. This can be simply manually ranking,
+.Required items
+- Add work item
+- Apply prioritization to set of work items. This can be simply manually ranking,
   or it could be something more interesting (like value-based scheduling).
 - Estimate work for a task (a set of roles and the number of man-weeks for
   each one)
-- Compute manpower required for a set of tasks. This will be by role
-- Define a set of tasks by applying a cutline
-- Need policy for how cutline changes when reapplying priorities
-- We need to add notes to tasks
-- We need to add tags to tasks. Do we need a separate tagging system?
-- Need to define tracks for each task. This could tie into tags mechanism.
-- Need statistics on tracks
-- Need reports on tracks. Who's assigned? Who's the lead? What's the backlog?
-  What's above the cutline
-- Need to assign people to tracks
-- Need a signoff mechanism
-- Need auth framework?
-- Need to create JIRA tasks automatically. Need to keep JIRA tasks in sync
-  with our tasks
+- Compute manpower required for a set of work items. This will be by role
+- Apply a cutline to partition work items into two sets
+- Should be able to see shortfall for each required role type for a list of
+  work items
+- Select role from predefined roles
+
+- Create new role
+
 
 Solution
 --------
+Work that's estimated at this level should have no assignees. It is merely
+used as a way to allocate resources at a high level. At some point, work can
+be broken down into tasks that people can do.
 
-
-- Pull incomplete items from previous quarters
-
+Assigning work to tracks will also be done later.
 
 Architecture
 ------------
+We should be able to separate the naming and estimation of work from the
+available manpower. In other words, we can assume that the available manpower
+is given as an input.
 
+We will need consistency in terms of the role tags, though. Should we just
+call tags "dimensions"? A role is one dimension, for instance.
+
+We shouldn't need "tracks" at this point. At this point the goals are to
+capture work, estimate it, and figure out how much we can commit to. The
+tracks can be defined based on what's above the cutline. It may fall into
+themes, or it may not.
+
+.Questions
+Should we have modules that we can plug together to build an app? For example,
+should we have a "tracks module", a "qplan module", a "priority module" and
+build a complete app out of them? Or should we have these be separate apps
+that interact only through the data they manipulate and share? I think the app
+should be built from libraries. Each library should have a well-defined API
+and source of data. We should be able to build a web app, a desktop app, or a
+mobile app from the same libraries.
 
 Risks
 -----
 - How do we do accounting for fullstack devs? We don't want to double-count
-  people who have multiple skills.
+  people who have multiple skills. Need to prototype this.
 - How is this persisted?
 - What is the interface? Combo of web interface, command line, ncurses, app?
 - How to interface with JIRA
+- How do we handle multiple people being assigned to work?
+- Should work be of generic kind without any assignees?
+- Need some way for the people service to interact with the planning service
+
+Things we're not doing
+======================
+
+May do later
+------------
+.Lower priority
+- We need to add tags to work items. Do we need a separate tagging system?
+- We need to add notes to work items
+- Delete work items
+- Remove person from team
+- Delete person
+
+.Even lower priority
+- Need a signoff mechanism
+- Need auth framework?
+- Need policy for how cutline changes when reapplying priorities
+- Create a set of work items in bulk
+- Auto-assign work items based on role/time left
+- Pull incomplete items from previous quarters
+- Break work items down into tasks
+
+
+
+Part of other app
+-----------------
+- Enter people and specify role
+- List people on a team by role
+- Generate stats on this list of people (e.g., how many iOS devs, how many
+  apps, how many QA).
+  - Stats may also be available manpower
+- Define team (can this be from a tag?)
+- Need to define tracks for each task. This could tie into tags mechanism.
+- Need to assign people to tracks. Does this mean adding a tag to a person?
+- Need statistics on tracks
+- Need reports on tracks. Who's assigned? Who's the lead? What's the backlog?
+  What's above the cutline
+- Need to create JIRA tasks automatically. Need to keep JIRA tasks in sync
+  with our tasks
 
 ----
 // vim: set syntax=asciidoc:
