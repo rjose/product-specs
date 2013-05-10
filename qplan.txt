@@ -1,0 +1,73 @@
+QPlan
+=====
+Rino Jose <rjose@linkedin.com>
+v0.1, May 10, 2013: Initial version
+
+Overview
+--------
+I want to have a better way of doing quarterly planning. I want to have this
+be a data source for other applications here. The goal is to have a set of
+prioritized items above a cutline that's reasonable to complete over a
+quarter.
+
+Problem
+-------
+Current quarterly planning is very time intensive and manual. Data is added to
+spreadsheets in an ad hoc way. Information (like effort/role estimates) must
+be continuously parsed manually. Even enumerating our staff needs to be done
+manually. We're doing back-of-the-envelope calculations when we should
+leverage the power of a computer.
+
+Basically, planning takes too long, is too much effort, involves too many
+people, and is difficult to revise.
+
+Data gets stuck in the spreadsheet.
+
+.What do we need?
+- List people on a team by role
+- Generate stats on this list of people (e.g., how many iOS devs, how many
+  apps, how many QA).
+  - Stats may also be available manpower
+- System can assign work based on role/time left
+- Create a set of tasks
+- Apply prioritization to set of tasks. This can be simply manually ranking,
+  or it could be something more interesting (like value-based scheduling).
+- Estimate work for a task (a set of roles and the number of man-weeks for
+  each one)
+- Compute manpower required for a set of tasks. This will be by role
+- Define a set of tasks by applying a cutline
+- Need policy for how cutline changes when reapplying priorities
+- We need to add notes to tasks
+- We need to add tags to tasks. Do we need a separate tagging system?
+- Need to define tracks for each task. This could tie into tags mechanism.
+- Need statistics on tracks
+- Need reports on tracks. Who's assigned? Who's the lead? What's the backlog?
+  What's above the cutline
+- Need to assign people to tracks
+- Need a signoff mechanism
+- Need auth framework?
+- Need to create JIRA tasks automatically. Need to keep JIRA tasks in sync
+  with our tasks
+
+Solution
+--------
+
+
+- Pull incomplete items from previous quarters
+
+
+Architecture
+------------
+
+
+Risks
+-----
+- How do we do accounting for fullstack devs? We don't want to double-count
+  people who have multiple skills.
+- How is this persisted?
+- What is the interface? Combo of web interface, command line, ncurses, app?
+- How to interface with JIRA
+
+----
+// vim: set syntax=asciidoc:
+----
