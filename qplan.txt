@@ -1,7 +1,9 @@
 QPlan
 =====
 Rino Jose <rjose@linkedin.com>
-v0.5, May 10, 2013: Added thoughts on technology
+v0.6, May 11, 2013: Added more thoughts on technology and structure
+
+NOTE: Revise to tighten up. Also add prototypes section to Risks.
 
 Overview
 --------
@@ -79,9 +81,21 @@ We should create the skeleton of an app that starts a repl and that kicks off a
 thread that writes data to disk periodically. One of the commands we have should
 start a web server.
 
+We should structure our app so that we can construct it from modular libraries
+that plug together. Our skeleton should be an example of assembling these
+modules into a threaded application.
+
 We don't want to have a GUI for these apps. We will want to have a console
 interface: commandline + ncurses. One of our first prototypes should be the
 general shell of the app. We may want to write a separate spec around this.
+
+We should experiment with networking protocols to do things like update a web
+page automatically from the app.
+
+In developing prototypes, I should strive for correctness up front. I should
+strive for having it work properly the first time. I will run into syntax errors
+and compilation issues and runtime bugs and needing to look up APIs, but I want
+these to be less and less and less over time.
 
 Risks
 -----
@@ -96,6 +110,7 @@ Risks
 - Need fuzzy text search
 - Persistence mechanism. Look into tpl for serializing C data
 - How to tie work items with other functions?
+- How to push changes from the server to a browser
 
 Things we're not doing
 ======================
