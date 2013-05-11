@@ -1,7 +1,7 @@
 QPlan
 =====
 Rino Jose <rjose@linkedin.com>
-v0.4, May 10, 2013: Added a few questions
+v0.5, May 10, 2013: Added thoughts on technology
 
 Overview
 --------
@@ -72,6 +72,16 @@ that interact only through the data they manipulate and share? I think the app
 should be built from libraries. Each library should have a well-defined API
 and source of data. We should be able to build a web app, a desktop app, or a
 mobile app from the same libraries.
+
+Technology
+~~~~~~~~~~
+We should create the skeleton of an app that starts a repl and that kicks off a
+thread that writes data to disk periodically. One of the commands we have should
+start a web server.
+
+We don't want to have a GUI for these apps. We will want to have a console
+interface: commandline + ncurses. One of our first prototypes should be the
+general shell of the app. We may want to write a separate spec around this.
 
 Risks
 -----
