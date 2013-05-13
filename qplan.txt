@@ -1,121 +1,132 @@
 QPlan
 =====
 Rino Jose <rjose@linkedin.com>
-v0.7, May 12, 2013: Added thoughts on prototyping process
+v1.0, May 13, 2013: Added chart showing thread interaction.
 
-NOTE: Revise to tighten up. Also add prototypes section to Risks.
 
 Overview
 --------
-I want to have a better way of doing quarterly planning. I want to have this
-be a data source for other applications here. The goal is to have a set of
-prioritized items above a cutline that's reasonable to complete over a
+We need to do quarterly planning in a more systematic and efficient way. The
+data from the quarterly plan should be usable from other applications. The
+goal of this app is to gather, prioritize, and split a set of work items so
+that items "above the cutline" can be reasonably handled by a team over a
 quarter.
+
 
 Problem
 -------
-Current quarterly planning is very time intensive and manual. Data is added to
+Current quarterly planning is time intensive and very manual. Data is added to
 spreadsheets in an ad hoc way. Information (like effort/role estimates) must
-be continuously parsed manually. Even enumerating our staff needs to be done
-manually. We're doing back-of-the-envelope calculations when we should
-leverage the power of a computer.
+be continuously parsed manually by people. Even enumerating our staff needs to
+be done manually.
 
-Basically, planning takes too long, is too much effort, involves too many
-people, and is difficult to revise.
-
-Data gets stuck in the spreadsheet.
+Planning takes too long, is too much effort, involves too many people, and
+results in textual data that gets stuck as text in a spreadsheet.
 
 .Required items
 - Add work item
-- Apply prioritization to set of work items. This can be simply manually ranking,
-  or it could be something more interesting (like value-based scheduling).
+- Specify dependencies between work items (need to flag cycles)
 - Estimate work for a task (a set of roles and the number of man-weeks for
   each one)
+    - Select role from predefined roles
+    - Create new role
+- Apply prioritization to set of work items. This can be simply manually ranking,
+  or it could be something more interesting (like value-based scheduling).
 - Compute manpower required for a set of work items. This will be by role
-- Apply a cutline to partition work items into two sets
-- Should be able to see shortfall for each required role type for a list of
+- See shortfall for each required role type for a list of
   work items
-- Select role from predefined roles
+- Apply a cutline to partition work items into two sets
+- Write output to a Google spreadsheet
 
-- Create new role
 
-
-Solution
---------
-Work that's estimated at this level should have no assignees. It is merely
-used as a way to allocate resources at a high level. At some point, work can
-be broken down into tasks that people can do.
-
-Assigning work to tracks will also be done later.
-
+Assumptions
+-----------
+- Goal is to simply identify work that a team can commit to in a quarter
+- Assume available manpower is given as an input
+- Won't make assignments to individual people in this app
+- Won't define any tracks in this app
+- Won't write to JIRA
 
 
 Architecture
 ------------
-We should be able to separate the naming and estimation of work from the
-available manpower. In other words, we can assume that the available manpower
-is given as an input.
+Work items, roles, and teams should be treated as separate, independent
+blocks. These blocks should be modular. We should be able to assemble these
+blocks into a single app. We should design these blocks and our app so that
+these blocks may also be remote services. These blocks should be stackable
+libraries. Each library should have a well-defined API and a known source of
+data. When persisting the data, we should have separate files for each module.
 
-We will need consistency in terms of the role tags, though. Should we just
-call tags "dimensions"? A role is one dimension, for instance.
+The app that combines these modules should be multithreaded. The following is
+illustrative of how the threads interact:
 
-We shouldn't need "tracks" at this point. At this point the goals are to
-capture work, estimate it, and figure out how much we can commit to. The
-tracks can be defined based on what's above the cutline. It may fall into
-themes, or it may not.
+----
+  +--------+
+  |  main  |
+  +--------+
+       |
+       |        +----------+   +------+   +-------+
+       +--------| listener |   | REPL |   | saver |
+       |        +----------+   +------+   +-------+
+       |              |           |           |
+       |              |           |           |
+  HTTP |              |           |           |            +---------+
+  -----+------------>>+-----------+-----------+------------| web res |
+       |              |           |           |            +---------+
+       |              |           |           | save            |
+       |              |           |           |<----------------X
+  websocket request   |           |           |                           +-----------+
+  -----+------------>>+-----------+-----------+---------------------------| websocket |
+       |              |           |           |                           +-----------+
+       |              |           |           |                                  |
+       |              |           |           |                                  |
+       |              |           |           | save                             |
+       |              |           |           |<---------------------------------|
+       |              |           |           |                                  |
+       |              |           | quit      |                                  |
+       |              |           |-----------+--------------------------------->X
+       |              | stop      |           |                                   
+       |              X<----------|           |                                   
+       |                          |---------->X                                   
+       |<-------------------------X                                               
+       |                                                                          
+       |                                       
+       X                                       
+----
 
+We should be able to interact with the app via a REPL. The REPL will be in its
+own thread. The app should listen for HTTP and web socket connections.
 
+Prototypes
+----------
+Every prototype should have an associated micro spec. This spec should
+describe the risk that we're exploring. It should also describe the approach
+and the technology used. The spec should also list all of the programming
+errors that occurred before the prototype worked properly.
 
-.Questions
-Should we have modules that we can plug together to build an app? For example,
-should we have a "tracks module", a "qplan module", a "priority module" and
-build a complete app out of them? Or should we have these be separate apps
-that interact only through the data they manipulate and share? I think the app
-should be built from libraries. Each library should have a well-defined API
-and source of data. We should be able to build a web app, a desktop app, or a
-mobile app from the same libraries.
+In developing prototypes, we should strive for correctness up front. We will
+run into syntax errors and compilation issues and runtime bugs and needing to
+look up APIs, but we should learn from them and work to have these occur less
+and less over time.
 
-Technology
-~~~~~~~~~~
-We should create the skeleton of an app that starts a repl and that kicks off a
-thread that writes data to disk periodically. One of the commands we have should
-start a web server.
+We should also use our prototypes to figure out how to test functionality.
+Once we understand this, we should write tests that set up the important
+cases.  Once this is in play, we should do our design and implementation,
+testing each pass.
 
-We should structure our app so that we can construct it from modular libraries
-that plug together. Our skeleton should be an example of assembling these
-modules into a threaded application.
+Prototype list
+~~~~~~~~~~~~~~
+- Create a REPL that can show status (num threads, num connections, general
+  status)
+- Thread management via pthreads
+- Handle people with multiple skills (when trying to identify shortfall)
+- Serve browser request
+- Push updates to browser over web socket
+- Serialize/deserialize data
+- Fuzzy text search
+- Web UI
+- Write to a google doc
 
-We don't want to have a GUI for these apps. We will want to have a console
-interface: commandline + ncurses. One of our first prototypes should be the
-general shell of the app. We may want to write a separate spec around this.
-
-We should experiment with networking protocols to do things like update a web
-page automatically from the app.
-
-In developing prototypes, I should strive for correctness up front. I should
-strive for having it work properly the first time. I will run into syntax errors
-and compilation issues and runtime bugs and needing to look up APIs, but I want
-these to be less and less and less over time.
-
-We should develop prototypes first and then figure out how to test the
-functionality of the prototype. Once we understand this, we should write a suite
-of tests that set up the cases I'm interested in. Once this is in play, we
-should do our design and implementation, testing each pass.
-
-Risks
------
-- How do we do accounting for fullstack devs? We don't want to double-count
-  people who have multiple skills. Need to prototype this.
-- How is this persisted?
-- What is the interface? Combo of web interface, command line, ncurses, app?
-- How to interface with JIRA
-- How do we handle multiple people being assigned to work?
-- Should work be of generic kind without any assignees?
-- Need some way for the people service to interact with the planning service
-- Need fuzzy text search
-- Persistence mechanism. Look into tpl for serializing C data
-- How to tie work items with other functions?
-- How to push changes from the server to a browser
 
 Things we're not doing
 ----------------------
