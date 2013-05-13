@@ -1,7 +1,7 @@
 QPlan
 =====
 Rino Jose <rjose@linkedin.com>
-v0.6, May 11, 2013: Added more thoughts on technology and structure
+v0.7, May 12, 2013: Added thoughts on prototyping process
 
 NOTE: Revise to tighten up. Also add prototypes section to Risks.
 
@@ -97,6 +97,11 @@ strive for having it work properly the first time. I will run into syntax errors
 and compilation issues and runtime bugs and needing to look up APIs, but I want
 these to be less and less and less over time.
 
+We should develop prototypes first and then figure out how to test the
+functionality of the prototype. Once we understand this, we should write a suite
+of tests that set up the cases I'm interested in. Once this is in play, we
+should do our design and implementation, testing each pass.
+
 Risks
 -----
 - How do we do accounting for fullstack devs? We don't want to double-count
@@ -113,10 +118,10 @@ Risks
 - How to push changes from the server to a browser
 
 Things we're not doing
-======================
+----------------------
 
 May do later
-------------
+~~~~~~~~~~~~
 .Lower priority
 - We need to add tags to work items. Do we need a separate tagging system?
 - We need to add notes to work items
@@ -136,7 +141,7 @@ May do later
 
 
 Part of other app
------------------
+~~~~~~~~~~~~~~~~~
 - Enter people and specify role
 - List people on a team by role
 - Generate stats on this list of people (e.g., how many iOS devs, how many
@@ -150,7 +155,3 @@ Part of other app
   What's above the cutline
 - Need to create JIRA tasks automatically. Need to keep JIRA tasks in sync
   with our tasks
-
-----
-// vim: set syntax=asciidoc:
-----
