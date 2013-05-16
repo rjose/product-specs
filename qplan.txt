@@ -116,12 +116,12 @@ testing each pass.
 
 Prototype list
 ~~~~~~~~~~~~~~
-- Create a REPL that can show status (num threads, num connections, general
-  status)
-- Thread management via pthreads
-- Handle people with multiple skills (when trying to identify shortfall)
+- link:https://github.com/rjose/prototypes/tree/master/objc[Get GNUstep running on Linux]
+- link:https://github.com/rjose/prototypes/tree/master/repl[Create a REPL that
+  can show status (num threads, num connections, general status)]
 - Serve browser request
 - Push updates to browser over web socket
+- Handle people with multiple skills (when trying to identify shortfall)
 - Serialize/deserialize data
 - Fuzzy text search
 - Web UI
