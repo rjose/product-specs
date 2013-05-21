@@ -122,11 +122,21 @@ Prototype list
 - Serve browser request
 - Push updates to browser over web socket
 - Handle people with multiple skills (when trying to identify shortfall)
-- Serialize/deserialize data
 - Fuzzy text search
 - Web UI
+- Console UI (show items, team)
 - Write to a google doc
+- Integrate with Lua
 
+These are development prototypes:
+
+- Model roles
+- Model work items with structs and Objective-C. Also add estimates
+- Manpower computation
+- Model prioritization, especially cross team
+- Serialize/deserialize data
+- Model dependencies (figure out what the risk is)
+- Apply a cutline to partition work items into two sets
 
 Things we're not doing
 ----------------------
