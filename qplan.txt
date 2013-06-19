@@ -17,11 +17,10 @@ Problem
 -------
 Current quarterly planning is time intensive and very manual. Data is added to
 spreadsheets in an ad hoc way. Information (like effort/role estimates) must
-be continuously parsed manually by people. Even enumerating our staff needs to
-be done manually.
+be continuously parsed mentally by people. Even enumerating our staff needs to
+be done manually. We don't have a great way to account for generalists in the
+plan (i.e., people who can do either server or ios or android development).
 
-Planning takes too long, is too much effort, involves too many people, and
-results in textual data that gets stuck as text in a spreadsheet.
 
 .Required items
 - Add work item
@@ -58,7 +57,7 @@ libraries. Each library should have a well-defined API and a known source of
 data. When persisting the data, we should have separate files for each module.
 
 The app that combines these modules should be multithreaded. The following is
-illustrative of how the threads interact:
+one concept for how the threads might interact:
 
 ----
   +--------+
@@ -116,27 +115,35 @@ testing each pass.
 
 Prototype list
 ~~~~~~~~~~~~~~
-- link:https://github.com/rjose/prototypes/tree/master/objc[Get GNUstep running on Linux]
-- link:https://github.com/rjose/prototypes/tree/master/repl[Create a REPL that
-  can show status (num threads, num connections, general status)]
-- Serve browser request
-- Push updates to browser over web socket
-- Handle people with multiple skills (when trying to identify shortfall)
-- Fuzzy text search
-- Web UI
-- Console UI (show items, team)
-- Write to a google doc
+.Tech prototypes
+- link:https://github.com/rjose/prototypes/tree/master/objc[
+      Get GNUstep running on Linux]
+- link:https://github.com/rjose/prototypes/tree/master/repl[
+      Create a REPL that can show status (num threads, num connections,
+      general status)]
+- link:https://github.com/rjose/prototypes/tree/477624/serve_http[
+      Serve browser request]
+- link:https://github.com/rjose/prototypes/tree/832d49/serve_ws[
+      Push updates to browser over web socket]
+- link:https://github.com/rjose/prototypes/tree/ea9ac6/handle_mult_skills[
+      Handle people with multiple skills (when trying to identify shortfall)]
 - Integrate with Lua
+- Figure out persistence
+- Fuzzy text search
+- Console UI (show items, team)
+- Web UI (readonly)
+- Write to a google doc
 
-These are development prototypes:
 
-- Model roles
-- Model work items with structs and Objective-C. Also add estimates
-- Manpower computation
-- Model prioritization, especially cross team
-- Serialize/deserialize data
-- Model dependencies (figure out what the risk is)
-- Apply a cutline to partition work items into two sets
+.Feature prototypes
+- Model roles, people, work items (and work dependencies)
+- Compute resource demand for a work item set
+- Create a set of work items
+- Prioritize a set of work items
+- Apply a cutline to partition work items into will and won't do
+- See shortfall for each required role type for a list of work items
+- Answer question: Is this a feasible plan?
+
 
 Things we're not doing
 ----------------------
