@@ -1,0 +1,97 @@
+Verse
+=====
+Rino Jose <@rjose>
+v1, June 18, 2013: Initial version
+
+Freewriting
+-----------
+I want something, even just a set of conventions or interfaces, to hold all of
+the planning apps together. There should be a Hopper for drawing work out of.
+
+I want the idea of a commandline server to be pervasive, but there will be
+archives of information. For the most part, could these be spreadsheets? Or even
+just text files? I want to get away from needing all of these services to be
+running in order for something to run. I want there to be local services that
+spring into existence when needed (like during a planning session). There can be
+richness in the secondary UIs, but it should be like a flower blooming in the
+desert.
+
+If data comes from and goes back into spreadsheets, we'll need conventions for
+the columns. We need to make sure that we don't merge cells or do anything
+funky. I think it's totally fine to have to rewrite the code to pull data in and
+export it back to the spreadsheet. This should be written in a high level
+scripting language. Underneath this should be a layer that is more stable. This
+should be production-grade code with tests and high reliability. This stable
+code should be written in a lower level language like C. We need to be able to
+build these tools for OS X and Linux.
+
+Data should be stored in plain text. They should be validated and manipulated
+with tools like awk. They should be under version control if necessary to
+provide another level of archiving.
+
+Let's think through how this would work with planning. We'd start with a
+spreadsheet to do quarterly planning. Once this is done, we could use the final
+spreadsheet for sprint planning. This might be an SPlan tool that could give
+high level target dates for each work item. This tool would be used to actually
+assign work items to individuals. Perhaps the first step is to have a senior
+engineer break down the work into phases. Risk should be identified. Prototypes
+should explore risk. Once this is settled, we could do something like create
+JIRA tickets that can be tracked via GreenHopper. We'll need something that can
+pull status out of JIRA (maybe into a spreadsheet or maybe accessed directly).
+
+You'd need a tool to track progress and to let you know where the schedule risk
+is and the potential schedule impact. This would need to know project structure
+and task dependencies. The source of truth here should be JIRA. This tool should
+be able to construct emails asking for more detail. The Tracker tool will need
+to build and operate on the task graph. It will have to figure out critical path
+and slack. We'll have to rely on project managers to make sure things like
+vacations are captured properly. I think the tracking tool in one group can work
+independently of other groups. I'll have to think this through a little, but as
+long as the source of truth is maintained, this can come and go without impact.
+The existence of the tool will only be for the purpose of answering a question
+or performing a task.
+
+We'll need a Hopper tool for capturing sustaining work and distributing it.
+These are things that should be done but don't belong to a specific project. For
+example, these could be blog posts, preparing talks, doing InDay projects,
+fielding prod issues. This tool should be able to give candidates who are
+available to take the work on. It should look at the current
+loading/value/impact of having each person take it on.
+
+There needs to be another tool that ties OKRs and estimates of value into the
+work items. This is the Align tool. I want product managers and execs to take
+their OKRs for their teams and taking guesses at what the impact of not doing
+these things is on the company. As a first cut, we can do something simple like
+asking people to estimate the loss of value for slipping something by one
+quarter. I don't know how sophisticated we can get with this. Ideally, we'd use
+information from our bizops people and our data scientists who should be trying
+to predict the impact of doing certain things. In any case, the output of this
+is a set of value curves for each major feature/initiative. We may need to
+experiement with this to get it right.
+
+We could combine the Tracking tool and the Align/Value tool to provide a high
+level status of when each feature is likely to ship. Maybe a Program Manager
+could launch the commandline server and pull relevant data.
+
+One part that's missing is somehow getting fresh value data for each work item.
+If commandline servers come into existence on demand and go away afterwards, how
+would this work? From JIRA we could extract dependencies and construct the task
+graph. I suppose from another spreadsheet, we could get value data. Based on
+this, we could construct value for each work item. Once we have this, we can
+sort items from the Hopper and distribute them to people in order. We could also
+update people's todo lists? If we could write meta data into JIRA, we could
+extract this directly and use it in another tool. I'm not sure individual
+engineers would ever want to use the tool. Probably a link to a spreadsheet
+would be good enough. Project managers would need to ensure that information is
+updated properly in JIRA.
+
+The combination of the Tracker/Scheduler and Value/Align would help us figure
+out the correct sequence of work and provide insight into when work could be
+done.
+
+I want to work with text files, but when data is ready to be shared it should be
+published to spreadsheets. Maybe we could use spreadsheets as the interchange
+format for JIRA as well.
+
+This might help solve the problem of stale data in wikis and JIRA. If it's
+always being regenerated, then it has a good chance of being fresh.
