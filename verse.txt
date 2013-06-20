@@ -95,3 +95,13 @@ format for JIRA as well.
 
 This might help solve the problem of stale data in wikis and JIRA. If it's
 always being regenerated, then it has a good chance of being fresh.
+
+Tools List
+----------
+What are the tools?
+
+- Align
+- QPlan
+- SPlan
+- Hopper
+- Tracker
